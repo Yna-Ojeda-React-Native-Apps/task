@@ -4,7 +4,8 @@ import TaskList from './screens/TaskList';
 
 const App = () => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} 
+    contentContainerStyle={{flexGrow:1}}>
       <TaskList title="My Tasks"/>
     </View>
   );

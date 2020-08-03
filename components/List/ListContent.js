@@ -1,38 +1,36 @@
 import React, {useState} from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity, FlatList, Text, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
-import UpdateModal from './UpdateModal';
 
 
-const ListContent = ({items, onPressCheckbox, onDeleteItem, onUpdateItem }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+
+const ListContent = ({items, onPressCheckbox, setModalVisible, setModalItem}) => {
+  
   return(
-    <View>
-      <FlatList 
+    <View style={{flex:1}} contentContainer={{flexgrow: 1}}>
+      <FlatList
         data={items}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <TouchableOpacity
-          style={styles.listItem}
-          onLongPress={()=>{setModalVisible(true);}}>
-            <UpdateModal
-              onDeleteItem={onDeleteItem}
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
-              onUpdateItem={onUpdateItem}
-              item={item}
-            />
-            <View style={styles.listItemView}>
-              <Icon
-              name={item.completed ? "checkbox-marked-circle-outline" : "checkbox-blank-circle-outline"}
-              size={15}
-              onPress={() => onPressCheckbox(item.id)}/>
-              <Text
-              style={item.completed ? styles.listItemTextCompleted : styles.listItemText}>
-                {item.name}
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity
+            style={styles.listItem}
+            onLongPress={()=>{
+              setModalItem(item);
+              setModalVisible(true);
+            ;}}>
+              <View style={styles.listItemView}>
+                <Icon
+                name={item.completed ? "checkbox-marked-circle-outline" : "checkbox-blank-circle-outline"}
+                size={15}
+                onPress={() => onPressCheckbox(item.id)}/>
+                <Text
+                style={item.completed ? styles.listItemTextCompleted : styles.listItemText}>
+                  {item.name}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         )}
       />
     </View>

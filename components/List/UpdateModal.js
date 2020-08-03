@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import { View, StyleSheet, Modal, Text, TextInput, TouchableOpacity} from 'react-native';
 
 
-const UpdateModal = ({modalVisible, item, onDeleteItem, setModalVisible, onUpdateItem}) => {
+const UpdateModal = ({modalVisible, item, onDeleteItem, onUpdateItem}) => {
   const [newItemName, onChangeItemName] = useState('');
   return(
+    // <View style={(modalVisible) ? {opacity: 1} : {opacity: 0}}>
+    //   <Text>{item.name}</Text>
+    // </View>
     <Modal
     transparent={true}
     visible={modalVisible}
@@ -24,7 +27,6 @@ const UpdateModal = ({modalVisible, item, onDeleteItem, setModalVisible, onUpdat
             style={{color: 'red', padding: 10}}
             onPress={() => {
               onDeleteItem(item.id);
-              setModalVisible(false);
             }}>
               Delete
             </Text>
@@ -32,7 +34,6 @@ const UpdateModal = ({modalVisible, item, onDeleteItem, setModalVisible, onUpdat
             style={{color: 'blue', padding: 10}}
             onPress={() => {
               onUpdateItem(item.id, newItemName);
-              setModalVisible(false);
             }}>
               Save
             </Text>
